@@ -22,7 +22,7 @@ export default {
     SwiperSlide,
     SliderInner
   },
-  data () {
+  data() {
     return {
       swiperOptions: {
         pagination: {

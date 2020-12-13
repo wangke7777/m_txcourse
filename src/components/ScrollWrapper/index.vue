@@ -3,6 +3,9 @@
     <div class="scroll-content">
       <index-swiper :swiper-data="swiperData"></index-swiper>
       <main-title :data="{ field_name: '推荐课程', field: 'all' }"></main-title>
+      <recom-course-list
+        :recom-course-data="recomCourseData"
+      ></recom-course-list>
       <div v-if="fieldData.length > 0 && courseData.length > 0">
         <main-title :data="fieldData[0]"></main-title>
         <main-title :data="fieldData[1]"></main-title>
@@ -17,15 +20,17 @@
 import BetterScroll from "better-scroll";
 import IndexSwiper from "./IndexSwiper";
 import MainTitle from "./MainTittle";
+import RecomCourseList from "./RecomCourseList";
 import { getCourseDatas } from "@/models";
 
 export default {
   name: "IndexScrollWrapper",
   components: {
     IndexSwiper,
-    MainTitle
+    MainTitle,
+    RecomCourseList
   },
-  data () {
+  data() {
     return {
       swiperData: [],
       fieldData: [],
@@ -33,7 +38,7 @@ export default {
       recomCourseData: []
     };
   },
-  mounted () {
+  mounted() {
     this.getCourseDatas();
     this.scroll = new BetterScroll(this.$refs.wrapper, {
       mouseWheel: true,
@@ -42,7 +47,7 @@ export default {
     });
   },
   methods: {
-    async getCourseDatas () {
+    async getCourseDatas() {
       const { swipers, fields, courses, recomCourses } = await getCourseDatas();
       this.swiperData = swipers;
       this.fieldData = fields;

@@ -1,14 +1,14 @@
 import { API } from "@/configs/config";
 import { axiosGet } from "@/utils/http";
 
-function getCourseDatas () {
+function getCourseDatas() {
   return new Promise((resolve, reject) => {
     axiosGet({
       url: API.getCourseDatas,
-      success (data) {
+      success(data) {
         resolve(data.result);
       },
-      error (err) {
+      error(err) {
         reject(err);
       }
     });
