@@ -11,9 +11,6 @@ export default {
   components: {
     PageHeader
   },
-  data () {
-    return {};
-  },
   methods: {}
 };
 </script>
