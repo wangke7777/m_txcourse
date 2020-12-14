@@ -30,8 +30,8 @@ export default {
           clickable: true
         },
         loop: true,
-        loopedSliders: 1
-        // autoplay: true
+        loopedSliders: 1,
+        autoplay: true
       }
     };
   }

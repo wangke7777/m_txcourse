@@ -8,19 +8,33 @@
       ></recom-course-list>
       <div v-if="fieldData.length > 0 && courseData.length > 0">
         <main-title :data="fieldData[0]"></main-title>
+        <course-list
+          :course-data="courseData | filterCourseData('0')"
+        ></course-list>
         <main-title :data="fieldData[1]"></main-title>
+        <course-list
+          :course-data="courseData | filterCourseData('1')"
+        ></course-list>
         <main-title :data="fieldData[2]"></main-title>
+        <course-list
+          :course-data="courseData | filterCourseData('2')"
+        ></course-list>
         <main-title :data="fieldData[3]"></main-title>
+        <course-list
+          :course-data="courseData | filterCourseData('3')"
+        ></course-list>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import BetterScroll from "better-scroll";
+import BScroll from "@better-scroll/core";
 import IndexSwiper from "./IndexSwiper";
 import MainTitle from "./MainTittle";
 import RecomCourseList from "./RecomCourseList";
+import CourseList from "./CourseList";
+
 import { getCourseDatas } from "@/models";
 
 export default {
@@ -28,7 +42,8 @@ export default {
   components: {
     IndexSwiper,
     MainTitle,
-    RecomCourseList
+    RecomCourseList,
+    CourseList
   },
   data() {
     return {
@@ -40,11 +55,7 @@ export default {
   },
   mounted() {
     this.getCourseDatas();
-    this.scroll = new BetterScroll(this.$refs.wrapper, {
-      mouseWheel: true,
-      click: true,
-      tap: true
-    });
+    this.init();
   },
   methods: {
     async getCourseDatas() {
@@ -53,6 +64,16 @@ export default {
       this.fieldData = fields;
       this.courseData = courses;
       this.recomCourseData = recomCourses;
+    },
+    init() {
+      this.bs = new BScroll(this.$refs.wrapper, {
+        probeType: 3,
+        click: true
+      });
+      //手指放在滚动容器内 从新计算高度 解决图片加载慢导致的滚动内容高度不正确
+      this.bs.on("beforeScrollStart", () => {
+        this.bs.refresh();
+      });
     }
   }
 };
