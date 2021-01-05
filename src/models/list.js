@@ -1,28 +1,28 @@
 import { API } from "@/configs/config";
 import { axiosGet } from "@/utils/http";
 
-function getCourseFields () {
+function getCourseFields() {
   return new Promise((resolve, reject) => {
     axiosGet({
       url: API.getCourseFields,
-      success (data) {
+      success(data) {
         resolve(data.result);
       },
-      error (err) {
+      error(err) {
         reject(err);
       }
     });
   });
 }
 
-function getCourses (field) {
+function getCourses(field) {
   return new Promise((resolve, reject) => {
     axiosGet({
       url: API.getCourses + field,
-      success (data) {
+      success(data) {
         resolve(data.result);
       },
-      error (err) {
+      error(err) {
         reject(err);
       }
     });
